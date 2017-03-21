@@ -24,7 +24,7 @@
 			<div class="product-desc">
 				<div class="col-md-7 product-view">
 					<h2>{{ $classified->name }}</h2>
-					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">state</a>, <a href="#">{{ $classified->city->name }}</a>| Added at {{ $classified->created_at->toDateString() }}, Ad ID: {{ $classified->id }}</p>
+					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">state</a>, <a href="#">{{ $classified->city }}</a>| Added at {{ $classified->created_at->toDateString() }}, Ad ID: {{ $classified->id }}</p>
 					<div class="flexslider">
 						<ul class="slides">
 							@foreach($classified->images as $image)

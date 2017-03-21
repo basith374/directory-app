@@ -200,7 +200,7 @@ var elem=$('#container ul');
 										@endif
 										<section class="list-left">
 											<h5 class="title">{{ $classified->name }}</h5>
-											<span class="adprice">AED {{ $classified->price }}</span>
+											<span class="adprice">{{ $classified->currency }} {{ $classified->price }}</span>
 											<p class="catpath">{{ $classified->category->name }}</p>
 										</section>
 										<section class="list-right">
