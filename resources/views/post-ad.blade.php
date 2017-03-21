@@ -25,7 +25,7 @@
 					</div>
 					@endif
 					<label>Select Category <span>*</span></label>
-					<select class="" name="category_id">
+					<select class="" name="category_id" required>
 						@foreach($categories as $category)
 							<optgroup label="{{ $category->name }}">
 							@foreach($category->children as $sub)
@@ -36,20 +36,24 @@
 					</select>
 					<div class="clearfix"></div>
 					<label>Select City <span>*</span></label>
-					<select class="" name="city_id">
-						@foreach($cities as $city)
-						<option value="{{ $city->id }}">{{ $city->name }}</option>
-						@endforeach
-					</select>
+					<input type="text" class="phone" placeholder="" name="city" value="{{ old('city') }}" id="city-input">
 					<div class="clearfix"></div>
 					<label>Ad Title <span>*</span></label>
-					<input type="text" class="phone" placeholder="" name="name" value="{{ old('name') }}">
+					<input type="text" class="phone" placeholder="" name="name" value="{{ old('name') }}" required>
 					<div class="clearfix"></div>
 					<label>Ad Description <span>*</span></label>
-					<textarea class="mess" placeholder="Write few lines about your product" name="description">{{ old('description') }}</textarea>
+					<textarea class="mess" placeholder="Write few lines about your product" name="description" required>{{ old('description') }}</textarea>
 					<div class="clearfix"></div>
 					<label>Price</label>
 					<input type="text" class="phone" placeholder="" name="price" value="{{ old('price') }}">
+					<div class="clearfix"></div>
+					<label>Currency</label>
+					<select class="phone" name="currency">
+						<option value="INR">INR</option>
+						<option value="INR">AED</option>
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+					</select>
 					<div class="clearfix"></div>
 					<div class="upload-ad-photos">
 						<label>Photos for your ad :</label>	
@@ -60,15 +64,15 @@
 					</div>
 					<div class="personal-details">
 						<label>Your Name <span>*</span></label>
-						<input type="text" class="name" placeholder="" name="owner" value="{{ old('name') }}">
+						<input type="text" class="name" placeholder="" name="owner" value="{{ old('name') }}" required>
 						<div class="clearfix"></div>
 						<label>Your Mobile No <span>*</span></label>
-						<input type="text" class="phone" placeholder="" name="mobile" value="{{ old('mobile') }}">
+						<input type="text" class="phone" placeholder="" name="mobile" value="{{ old('mobile') }}" required>
 						<div class="clearfix"></div>
-						<label>Your Email Address <span>*</span></label>
+						<label>Your Email Address </label>
 						<input type="text" class="email" placeholder="" name="email" value="{{ old('email') }}">
 						<div class="clearfix"></div>
-						<p class="post-terms">By clicking <strong>post Button</strong> you accept our <a href="terms.html" target="_blank">Terms of Use </a> and <a href="privacy.html" target="_blank">Privacy Policy</a></p>
+						<p class="post-terms">By clicking <strong>post Button</strong> you accept our <a href="#" target="_blank">Terms of Use </a> and <a href="#" target="_blank">Privacy Policy</a></p>
 						<input type="submit" value="Post">
 						<div class="clearfix"></div>
 					</div>
@@ -112,6 +116,19 @@
 				});
 			}
 		});
+		// 
 	</script>
+	<script type="text/javascript">
+		function initMap() {
+        	var input = document.getElementById('city-input');
+        	var autocomplete = new google.maps.places.Autocomplete(input);
+        	autocomplete.addListener('place_changed', function() {
+          		var place = autocomplete.getPlace();
+          		console.log(place.geometry.location)
+        	});
+		}
+	</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeiE68bF7PYcHMdnGt4WVbiBkIlJg50A&libraries=places&callback=initMap"
+        async defer></script>
 	<!-- // Submit Ad -->
 @endsection

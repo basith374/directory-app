@@ -13,6 +13,16 @@ class CreateTableCities extends Migration
      */
     public function up()
     {
+        Schema::create('countries', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+        Schema::create('states', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -29,5 +39,7 @@ class CreateTableCities extends Migration
     public function down()
     {
         Schema::dropIfExists('cities');
+        Schema::dropIfExists('states');
+        Schema::dropIfExists('countries');
     }
 }

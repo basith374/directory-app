@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layout', [
+	'title' => implode(' - ', [(isset($category) ? $category->name : ''), isset($city) ? $city : ''])
+])
 
 @section('head')
 
@@ -44,7 +46,7 @@ var elem=$('#container ul');
 						<select name="city">
 							<option selected value style="display:none;color:#eee;">Entire UAE</option>
 							@foreach($cities as $c)
-							<option value="{{ $c->slug }}" {{ $c->slug == Request::get('city') ? 'selected':null }}>{{ $c->name }}</option>
+							<option value="{{ $c->slug }}" {{ isset($city) && $c->slug == $city->slug ? 'selected':null }}>{{ $c->name }}</option>
 							@endforeach
 			            </select>
 					</div>
@@ -147,7 +149,7 @@ var elem=$('#container ul');
 						@foreach($featured as $ad)
 						<div class="featured-ad">
 							<a href="{{ url('classifieds/' . $ad->id) }}">
-								@if($ad->images)
+								@if($ad->images->count())
 								<div class="featured-ad-left">
 									<img src="{{ $ad->images->first()->image }}" title="ad image" alt="" />
 								</div>

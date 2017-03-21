@@ -39,10 +39,9 @@ Route::get('/post-ad', 'ClassifiedController@create');
 Route::post('/post-ad', 'ClassifiedController@store');
 Route::post('/post-ad-images', 'ClassifiedController@tempImages');
 
-Route::get('/categories', function() {
-	$categories = \App\Category::root()->with('children')->get();
-	return view('categories', ['categories' => $categories]);
-});
+Route::get('/categories/{cat?}', 'CategoryController@index');
+
+Route::get('sitemap', 'SearchController@sitemap');
 
 Route::get('/all-classifieds', 'ClassifiedController@index');
 
@@ -87,6 +86,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('settings', 'AdminController@settings');
 	Route::post('settings/banner', 'AdminController@changeBanner');
 
+	Route::get('cities', 'AdminController@cities');
+
 });
 
-Route::get('{category}/{subcategory?}', 'CategoryController@show');
+Route::get('{search}/{search2?}', 'SearchController@search');

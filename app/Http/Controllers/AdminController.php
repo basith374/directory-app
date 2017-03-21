@@ -277,4 +277,13 @@ class AdminController extends Controller
 		return redirect()->back()->with('success', 'Banner Changed');
 	}
 
+	public function cities(Request $request) {
+		if($request->ajax()) {
+			$cities = City::all();
+			return $cities;
+		} else {
+			return view('admin.cities');	
+		}
+	}
+
 }

@@ -1,4 +1,8 @@
-@extends('layout', ['mini' => true])
+@extends('layout', [
+	'mini' => true,
+	'title' => $classified->name,
+	'description' => $classified->description
+])
 
 @section('content')
 	<!--single-page-->
@@ -66,7 +70,7 @@
 						</div>
 						<div class="itemtype">
 							<p class="p-price">Item Type</p>
-							<h4>Phones</h4>
+							<h4>{{ $classified->category->name }}</h4>
 							<div class="clearfix"></div>
 						</div>
 					</div>

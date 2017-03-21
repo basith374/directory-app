@@ -70,7 +70,7 @@
             	@endforeach
             	</div>
             	@endif
-	            <form role="form" action="/admin/categories/{{ $category->slug or '' }}" method="POST">
+	            <form role="form" action="/admin/categories{{ isset($category) ? '/' . $category->slug : null }}" method="POST">
 	            	{{ csrf_field() }}
 	            	@if(isset($category))
 	            	<input type="hidden" name="_method" value="PATCH">

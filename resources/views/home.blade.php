@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layout', [
+	'title' => 'With You Always'
+])
 
 @section('content')
 
@@ -8,7 +10,7 @@
 			<div class="container">
 				@foreach($categories as $key => $cat)
 				<div class="col-md-2 focus-grid">
-					<a href="/categories#parentVerticalTab{{ $key + 1 }}">
+					<a href="/categories/{{ $cat->slug }}">
 						<div class="focus-border">
 							<div class="focus-layout">
 								<div class="focus-image"><i class="fa {{ $cat->extra_class }}" style="background:{{ $cat->color }};"></i></div>
@@ -31,8 +33,8 @@
 						<li>
 						@foreach($chunk as $classified)
 						<div class="col-md-3 biseller-column">
-							<a href="{{ url('classifieds/' . $classified->id) }}">
-								<img src="{{ $classified->images->first()->image }}"/>
+							<a href="{{ url('classifieds/' . $classified->id) }}" title="{{ $classified->name }}">
+								<img src="{{ $classified->images->first()->image }}" alt="{{ $classified->name }}"/>
 								<span class="price">&#36; {{ $classified->price }}</span>
 							</a> 
 							<div class="ad-info">
@@ -79,10 +81,10 @@
 		<div class="mobile-app">
 			<div class="container">
 				<div class="col-md-5 app-left">
-					<a href="mobileapp.html"><img src="/images/app.png" alt=""></a>
+					<a href="mobileapp.html"><img src="/img/app2.png" alt=""></a>
 				</div>
 				<div class="col-md-7 app-right">
-					<h3>Nokume App is the <span>Easiest</span> way for Selling and buying second-hand goods</h3>
+					<h3>Nokume App is the <span>Easiest</span> way for Selling and buying online goods</h3>
 					<p>Coming Soon to App Store &amp; Play Store.</p>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor Sed bibendum varius euismod. Integer eget turpis sit amet lorem rutrum ullamcorper sed sed dui. vestibulum odio at elementum. Suspendisse et condimentum nibh.</p>
 					<div class="app-buttons">

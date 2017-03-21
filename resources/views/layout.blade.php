@@ -10,8 +10,8 @@
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<meta name="keywords" content="{{ $keywords or $standard_keywords }}" />
+<meta name="description" content="{{ $description or $standard_description }}" />
 <script type="application/x-javascript">
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 </script>
@@ -101,27 +101,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="foo-grids">
 					<div class="col-md-3 footer-grid">
 						<h4 class="footer-head">Who We Are</h4>
-						<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-						<p>The point of using Lorem Ipsum is that it has a more-or-less normal letters, as opposed to using 'Content here.</p>
+						<p>nokume.com is a free classifieds website, that helps you with all your local and international needs. Single platform for  Buy, Sell, Exchange any items online, find best tour package for your holidays or honeymoon, find jobs, get business connection worldwide, get admission in famous institutions all over the world. Put your advertisement and many more...!!!</p>
 					</div>
 					<div class="col-md-3 footer-grid">
 						<h4 class="footer-head">Help</h4>
 						<ul>
-							<li><a href="howitworks.html">How it Works</a></li>						
-							<li><a href="sitemap.html">Sitemap</a></li>
-							<li><a href="faq.html">Faq</a></li>
+							<li><a href="/sitemap">Sitemap</a></li>
 							<li><a href="feedback.html">Feedback</a></li>
 							<li><a href="contact.html">Contact</a></li>
-							<li><a href="typography.html">Shortcodes</a></li>
+							<li><a href="terms.html">Terms of Use</a></li>
+							<li><a href="privacy.html">Privacy Policy</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3 footer-grid">
 						<h4 class="footer-head">Information</h4>
 						<ul>
-							<li><a href="regions.html">Locations Map</a></li>	
-							<li><a href="terms.html">Terms of Use</a></li>
-							<li><a href="popular-search.html">Popular searches</a></li>	
-							<li><a href="privacy.html">Privacy Policy</a></li>	
+							@foreach($cities as $city)
+							<li><a href="{{ $city->slug }}">{{ $city->name }}</a></li>
+							@endforeach
 						</ul>
 					</div>
 					<div class="col-md-3 footer-grid">

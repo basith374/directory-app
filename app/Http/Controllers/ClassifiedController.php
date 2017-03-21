@@ -5,19 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Classified;
+use App\City;
 use File;
 
 class ClassifiedController extends Controller
 {
 	protected $rules = [
 		'name' => 'required',
-		'price' => 'required',
 		'owner' => 'required',
-		'email' => 'required',
 		'mobile' => 'required',
 		'description' => 'required',
 		'category_id' => 'required',
-		'city_id' => 'required'
+		'city' => 'required'
 	];
 
 	/*
@@ -37,14 +36,18 @@ class ClassifiedController extends Controller
 		if($request->has('q')) {
 			$query->where('name', 'like', '%' . $request->q . '%');
 		}
+		$data = [];
 		if($request->has('city')) {
+			$data['city'] = City::where('slug', $request->city)->first();
 			$query->whereHas('city', function($q) use ($request) {
 				$q->where('slug', $request->city);
 			});
 		}
 		/* end shared */
 		$classifieds = $query->paginate(12);
-		return view('classifieds', compact('categories', 'cities', 'classifieds'));
+		$data = array_merge($data, compact('categories', 'cities', 'classifieds'));
+		// return response()->json($data, 200, [], JSON_PRETTY_PRINT);
+		return view('classifieds', $data);
     }
 
     public function create() {
@@ -56,15 +59,17 @@ class ClassifiedController extends Controller
     public function store(Request $request) {
     	// return response()->json($request->all(), 200, [], JSON_PRETTY_PRINT);
     	$this->validate($request, $this->rules);
-    	$data = $request->only('name', 'price', 'owner', 'email', 'mobile', 'description', 'category_id', 'city_id');
+    	$data = $request->only('name', 'price', 'owner', 'email', 'mobile', 'description', 'category_id', 'place', 'city');
     	if(auth()->check() && auth()->user()->userable_type == 'App\Member') {
     		$data['member_id'] = auth()->user()->userable_id;
     	}
     	$classified = Classified::create($data);
-    	foreach($request->images as $image) {
-	    	$classified->images()->create(['image' => '/uploads/' . $image]);
-	    	File::move(public_path() . '/uploads/temp/' . $image, public_path() . '/uploads/' . $image);
-    	}
+    	if($request->has('images')) {
+	    	foreach($request->images as $image) {
+		    	$classified->images()->create(['image' => '/uploads/' . $image]);
+		    	File::move(public_path() . '/uploads/temp/' . $image, public_path() . '/uploads/' . $image);
+	    	}
+	    }
     	return redirect('/post-ad')->with('success', 'Your ad has been posted');
     }
 

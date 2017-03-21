@@ -14,9 +14,17 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layout', function($view) {
+        $standard_description = 'nokume.com is a free classifieds website, that helps you with all your local and international needs. Single platform for  Buy, Sell, Exchange any items online, find best tour package for your holidays or honeymoon, find jobs, get business connection worldwide, get admission in famous institutions all over the world. Put your advertisement and many more...!!!';
+
+        $standard_keywords = 'yellowpages,classifieds,for,sale,sell,buy,online,second,hand,goods,real,estate,automobile,electronics';
+
+        View::composer('layout', function($view) use ($standard_description, $standard_keywords) {
             $settings = new \App\Settings;
+            $cities = \DB::table('cities')->take(10)->get();
             $view->with('settings', $settings);
+            $view->with('cities', $cities);
+            $view->with('standard_keywords', $standard_keywords);
+            $view->with('standard_description', $standard_description);
         });
         View::composer('admin.layout', function($view) {
             $not_approved = \App\Classified::where('approved', false)->count();
@@ -29,6 +37,7 @@ class ComposerServiceProvider extends ServiceProvider
                 $links = array_merge($links, [
                     ['name' => 'Members', 'href' => '/admin/members', 'icon' => 'fa-users'],
                     ['name' => 'Categories', 'href' => '/admin/categories', 'icon' => 'fa-tag'],
+                    ['name' => 'City', 'href' => '/admin/cities', 'icon' => 'fa fa-flag']
                 ]);
             }
             if($privilege < 2) {

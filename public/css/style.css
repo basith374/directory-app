@@ -2547,26 +2547,7 @@ h2.sear-head.fer {
     display: none;
   }
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    color: #555;
-    cursor: default;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
-    position: relative;
-    z-index: 1;
-    margin-bottom: -1px!important;
-    border-top: 1px solid;
-    border: 1px solid #CCCCCC !important;
-    border-top: 4px solid #f3c500 !important;
-    border-bottom: 1px #FFF solid !important;
-    background-color: #fff!important;
-	margin: 0;
-}
-.nav-tabs>li>a:hover {
-    border-color: transparent;
-    background-color: transparent;
-}
+
 .ads-display.col-md-9 {
     padding-left: 40px;
 }
@@ -2574,33 +2555,6 @@ div#myTabContent {
     border: 1px solid #CCCCCC !important;
     padding: 15px;
 	    position: relative;
-}
-.nav-tabs>li>a {
-    line-height: 1.42857143;
-    border: 1px solid transparent;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    -ms-border-radius: 4px 4px 0 0;
-    -o-border-radius: 4px 4px 0 0;
-    font-weight: 400;
-    font-size: 17px;
-    display: inline-block;
-    padding: 13px 15px;
-    list-style: none;
-    cursor: pointer;
-    float: left;
-    font-family: 'Ubuntu Condensed', sans-serif;
-}
-.nav-tabs>li>a>span {
-	color:#01A185;
-}
-.nav-tabs>li {
-    cursor: pointer;
-    border: 1px solid #F5F5F5;
-    border-color: rgb(245, 245, 245)!important;
-        border-left: none;
-    background-color: rgb(249, 249, 249)!important;
 }
 .bs-example-tabs .nav-tabs {
     margin-bottom: 0;

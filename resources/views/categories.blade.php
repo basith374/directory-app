@@ -3,6 +3,34 @@
 @section('head')
 <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css " />
 <script src="js/easyResponsiveTabs.js"></script>
+<style>
+	.nav-tabs>li>a {
+	    border-top-right-radius: 0;
+	    border-top-left-radius: 0;
+	    border-bottom-width: 0;
+	    color: #555;
+	    border-right-width: 1px;
+	    border-right-color: #ddd;
+	}
+	.nav-tabs>li.active>a,
+	.nav-tabs>li.active>a:focus,
+	.nav-tabs>li.active>a:hover {
+	    border-right-width: 0;
+	    border-bottom-left-radius: 4px;
+	    border-bottom-width: 1px;
+	    border-bottom-color: #ddd;
+	    border-left-color: #f3c500;
+	    border-left-width: 5px;
+	    border-top-left-radius: 4px;
+	}
+	#cat-tabs .foot {
+		text-align: center;
+		padding: 20px;
+	}
+	#cat-tabs .foot a {
+		color: #555;
+	}
+</style>
 @endsection
 
 @section('content')
@@ -11,16 +39,20 @@
 		<div class="container">
 			<h2 class="head">Main Categories</h2>
 			<div class="category-list">
-				<div id="parentVerticalTab">
-					<ul class="resp-tabs-list hor_1">
+				<div id="cat-tabs">
+					<div class="col-md-3">
+						<ul class="nav nav-tabs nav-stacked">
+							@foreach($categories as $cat)
+							<li{{ $cat->slug == $category ? ' class=active' : null }}><a href="#{{ $cat->slug}}">{{ $cat->name }}</a></li>
+							@endforeach
+						</ul>
+						<div class="foot">
+							<a href="/all-classifieds">All Ads</a>
+						</div>
+					</div>
+					<div class="tab-content col-md-9">
 						@foreach($categories as $cat)
-						<li>{{ $cat->name }}</li>
-						@endforeach
-						<a href="/all-classifieds">All Ads</a>
-					</ul>
-					<div class="resp-tabs-container hor_1">
-						@foreach($categories as $cat)
-						<div>
+						<div class="tab-pane{{ $cat->slug == $category ? ' active' : null }}" id="{{ $cat->slug }}">
 							<div class="category">
 								<div class="category-img">
 									<img src="{{ $cat->image }}" title="image" alt="" />
@@ -28,7 +60,7 @@
 								<div class="category-info">
 									<h4>{{ $cat->name }}</h4>
 									<span>{{ $cat->adCount() }} Ads</span>
-									<a href="{{ $cat->slug }}">View all Ads</a>
+									<a href="/{{ $cat->slug }}">View all Ads</a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -51,21 +83,10 @@
 	<script type="text/javascript">
     $(document).ready(function() {
 
-        //Vertical Tab
-        $('#parentVerticalTab').easyResponsiveTabs({
-            type: 'vertical', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            closed: 'accordion', // Start closed if in accordion view
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo2');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
+        $('#cat-tabs .nav a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		})
     });
 	</script>
 @endsection
