@@ -59,7 +59,7 @@ class ClassifiedController extends Controller
     public function store(Request $request) {
     	// return response()->json($request->all(), 200, [], JSON_PRETTY_PRINT);
     	$this->validate($request, $this->rules);
-    	$data = $request->only('name', 'price', 'owner', 'email', 'mobile', 'description', 'category_id', 'place', 'city');
+    	$data = $request->only('name', 'price', 'owner', 'email', 'mobile', 'description', 'category_id', 'currency', 'city');
     	if(auth()->check() && auth()->user()->userable_type == 'App\Member') {
     		$data['member_id'] = auth()->user()->userable_id;
     	}

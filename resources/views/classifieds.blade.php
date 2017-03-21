@@ -205,7 +205,7 @@ var elem=$('#container ul');
 										</section>
 										<section class="list-right">
 											<span class="date">Today, 17:55</span>
-											<span class="cityname">{{ $classified->city->name }}</span>
+											<span class="cityname">{{ $classified->city }}</span>
 										</section>
 										<div class="clearfix"></div>
 									</li> 

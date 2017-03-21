@@ -35,7 +35,7 @@
 						@endforeach
 					</select>
 					<div class="clearfix"></div>
-					<label>Select City <span>*</span></label>
+					<label>City <span>*</span></label>
 					<input type="text" class="phone" placeholder="" name="city" value="{{ old('city') }}" id="city-input">
 					<div class="clearfix"></div>
 					<label>Ad Title <span>*</span></label>
