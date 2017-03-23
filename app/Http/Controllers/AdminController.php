@@ -19,7 +19,6 @@ class AdminController extends Controller
 		'name' => 'required',
 		'price' => 'required',
 		'owner' => 'required',
-		'email' => 'required',
 		'mobile' => 'required',
 		'description' => 'required',
 		'category_id' => 'required',

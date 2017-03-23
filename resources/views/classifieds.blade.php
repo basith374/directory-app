@@ -156,7 +156,7 @@ var elem=$('#container ul');
 								@endif
 								<div class="featured-ad-right">
 									<h4>{{ $ad->name }}</h4>
-									<p>$ {{ $ad->price }}</p>
+									<p>{{ $ad->currency }} {{ $ad->price }}</p>
 								</div>
 								<div class="clearfix"></div>
 							</a>

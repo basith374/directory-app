@@ -236,7 +236,9 @@ var data = {
 	 	url: '/admin/cities',
 	 	method: 'GET',
 	 	success: function(rsp) {
-	 		console.log(rsp)
+	 		var category = new Category();
+	 		
+			$millerCol.millerColumn("addCol", category);
 	 	}
 	 })
 </script>

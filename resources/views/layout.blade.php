@@ -107,10 +107,10 @@
 						<h4 class="footer-head">Help</h4>
 						<ul>
 							<li><a href="/sitemap">Sitemap</a></li>
-							<li><a href="feedback.html">Feedback</a></li>
-							<li><a href="contact.html">Contact</a></li>
-							<li><a href="terms.html">Terms of Use</a></li>
-							<li><a href="privacy.html">Privacy Policy</a></li>
+							<li><a href="#">Feedback</a></li>
+							<li><a href="#">Contact</a></li>
+							<li><a href="#">Terms of Use</a></li>
+							<li><a href="#">Privacy Policy</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3 footer-grid">

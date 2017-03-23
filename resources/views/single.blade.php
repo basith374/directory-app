@@ -49,9 +49,7 @@
 					</script>
 					<!-- //FlexSlider -->
 					<div class="product-details">
-						<h4>Brand : <a href="#">Company name</a></h4>
 						<h4>Views : <strong>{{ $classified->views }}</strong></h4>
-						<p><strong>Display </strong>: 1.5 inch HD LCD Touch Screen</p>
 						<p><strong>Summary</strong> : {{ $classified->description }}.</p>
 					
 					</div>
@@ -60,12 +58,7 @@
 					<div class="item-price">
 						<div class="product-price">
 							<p class="p-price">Price</p>
-							<h3 class="rate">$ {{ $classified->price }}</h3>
-							<div class="clearfix"></div>
-						</div>
-						<div class="condition">
-							<p class="p-price">Condition</p>
-							<h4>Good</h4>
+							<h3 class="rate">{{ $classified->currency }} {{ $classified->price }}</h3>
 							<div class="clearfix"></div>
 						</div>
 						<div class="itemtype">
