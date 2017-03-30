@@ -64,6 +64,7 @@ class ClassifiedController extends Controller
     	if(auth()->check() && auth()->user()->userable_type == 'App\Member') {
     		$data['member_id'] = auth()->user()->userable_id;
     	}
+    	$data['description'] = trim($data['description']);
     	$classified = Classified::create($data);
     	if($request->has('images')) {
 	    	foreach($request->images as $image) {
@@ -81,7 +82,7 @@ class ClassifiedController extends Controller
 		$category = $classified->category;
 		if($category->parent_id) {
 			$parent = Category::find($category->parent_id);
-			$breadcrumbs[] = ['name' => $parent->name, 'href' => $parent->slug];
+			$breadcrumbs[] = ['name' => $parent->name, 'href' => '/' . $parent->slug];
 		}
 		$breadcrumbs[] = ['name' => $category->name];
     	return view('single', compact('classified', 'breadcrumbs'));

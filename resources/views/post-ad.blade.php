@@ -50,7 +50,7 @@
 					<label>Currency</label>
 					<select class="phone" name="currency">
 						<option value="INR">INR</option>
-						<option value="INR">AED</option>
+						<option value="AED">AED</option>
 						<option value="USD">USD</option>
 						<option value="EUR">EUR</option>
 					</select>

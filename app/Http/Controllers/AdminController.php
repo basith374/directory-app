@@ -17,12 +17,10 @@ class AdminController extends Controller
 
 	protected $classified_rules = [
 		'name' => 'required',
-		'price' => 'required',
 		'owner' => 'required',
 		'mobile' => 'required',
 		'description' => 'required',
-		'category_id' => 'required',
-		'city_id' => 'required'
+		'category_id' => 'required'
 	];
 
 
@@ -121,7 +119,12 @@ class AdminController extends Controller
 	public function updateClassified(Classified $classified, Request $request) {
 		// return response()->json($request->all(), 200, [], JSON_PRETTY_PRINT);
 		$this->validate($request, $this->classified_rules);
-		$classified->update($request->except('images'));
+		$data = $request->except('images');
+		$data['description'] = trim($data['description']);
+        if(empty($data['price'])) {
+            $data['price'] = null;
+        }
+		$classified->update($data);
 		$classified->images()->delete();
 		if($request->has('images')) {
 			foreach($request->images as $image) {

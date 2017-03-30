@@ -62,11 +62,7 @@
 	                </div>
 	                <div class="form-group">
 	                  <label for="cityInput">City</label>
-	                  <select name="city_id" class="form-control" id="cityInput">
-		                  @foreach($cities as $city)
-		                  <option value="{{ $city->id }}" {{ $classified->city_id?:old('city_id') == $city->id ? 'selected': '' }}>{{ $city->name }}</option>
-		                  @endforeach
-	                  </select>
+	                  <input type="text" class="form-control" id="cityInput" value="{{ $classified->city or old('city') }}">
 	                </div>
 	                <div class="form-group">
 	                  <label for="descInput">Description</label>
@@ -109,7 +105,7 @@
 	              <!-- /.box-body -->
 
 	              <div class="box-footer">
-	                <button type="submit" class="btn btn-primary">Submit</button>
+	                <button type="submit" class="btn btn-primary">Save Changes</button>
 	              </div>
 	            </form>
             </div>
@@ -159,4 +155,16 @@
 		}
 	});
 </script>
+<script type="text/javascript">
+	function initMap() {
+    	var input = document.getElementById('city-input');
+    	var autocomplete = new google.maps.places.Autocomplete(input);
+    	autocomplete.addListener('place_changed', function() {
+      		var place = autocomplete.getPlace();
+      		console.log(place.geometry.location)
+    	});
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeiE68bF7PYcHMdnGt4WVbiBkIlJg50A&libraries=places&callback=initMap"
+    async defer></script>
 @endsection

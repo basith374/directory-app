@@ -56,13 +56,15 @@
 				</div>
 				<div class="col-md-5 product-details-grid">
 					<div class="item-price">
+						@if($classified->price)
 						<div class="product-price">
 							<p class="p-price">Price</p>
 							<h3 class="rate">{{ $classified->currency }} {{ $classified->price }}</h3>
 							<div class="clearfix"></div>
 						</div>
+						@endif
 						<div class="itemtype">
-							<p class="p-price">Item Type</p>
+							<p class="p-price">Type</p>
 							<h4>{{ $classified->category->name }}</h4>
 							<div class="clearfix"></div>
 						</div>

@@ -155,8 +155,10 @@ var elem=$('#container ul');
 								</div>
 								@endif
 								<div class="featured-ad-right">
+									@if($ad->price)
 									<h4>{{ $ad->name }}</h4>
 									<p>{{ $ad->currency }} {{ $ad->price }}</p>
+									@endif
 								</div>
 								<div class="clearfix"></div>
 							</a>
@@ -200,11 +202,13 @@ var elem=$('#container ul');
 										@endif
 										<section class="list-left">
 											<h5 class="title">{{ $classified->name }}</h5>
+											@if($classified->price)
 											<span class="adprice">{{ $classified->currency }} {{ $classified->price }}</span>
+											@endif
 											<p class="catpath">{{ $classified->category->name }}</p>
 										</section>
 										<section class="list-right">
-											<span class="date">Today, 17:55</span>
+											<span class="date">{{ $classified->created_at }}</span>
 											<span class="cityname">{{ $classified->city }}</span>
 										</section>
 										<div class="clearfix"></div>

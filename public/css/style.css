@@ -2110,19 +2110,6 @@ form.submit {
     padding:0 15px;
 	position:relative;
 }
-.item-price:before {
-	    content: '';
-    position: absolute;
-    z-index: 1;
-    left: -50.5%;
-    background-color: rgba(0,0,0,0);
-    border: 105px solid rgba(0,0,0,0);
-    border-right-color: rgba(1, 161, 133, 0.36);
-    height: 0;
-    width: 0;
-    top: -3px;
-    border-right-width: 80px;
-}
 p.p-price {
     float: left;
     width: 50%;
@@ -3370,10 +3357,6 @@ label {
 		font-size: 12px;
 		margin-top: 10px;
 	}
-	.item-price:before {
-		left: -58.5%;
-		border-right-width: 68px;
-	}
 	h5.title {
 		font-size: 18px;
 		height: 57px;
@@ -3605,12 +3588,6 @@ label {
 		margin-left: 0;
 		padding: 0 15px;
 		margin-top: 15%;
-	}
-	.item-price:before {
-		left: 33.5%;
-		border-right-width: 90px;
-		top: -205px;
-		transform: rotate(90deg);
 	}
 	.interested,.tips {
 		margin-left: 0;
@@ -4179,11 +4156,6 @@ label {
 	.product-view h2 {
 		font-size: 22px;
 	}
-	.item-price:before {
-		left: 31.5%;
-		border-right-width: 60px;
-		top: -190px;
-	}
 	.work-section-grid {
 		width: 50%;
 		MARGIN-TOP:5EM;
@@ -4423,11 +4395,6 @@ label {
 	.sun-regions ul li {
 		width: 49%;
 	}
-	.item-price:before {
-		left: 27.5%;
-		border-right-width: 49px;
-		top: -185px;
-	}
 	.search-hotel input[type="text"] {
 		width: 84%;
 	}
@@ -4483,11 +4450,6 @@ label {
 	}
 	.product-view h2 {
 		font-size: 19px;
-	}
-	.item-price:before {
-		left: 24.5%;
-		border-right-width: 44px;
-		top: -182px;
 	}
 	.faq-list_h {
 		margin: 0 0 10px;
@@ -4635,11 +4597,6 @@ label {
 	}
 	.interested {
 		padding: 40px 0px;
-	}
-	.item-price:before {
-		left: 20.5%;
-		border-right-width: 37px;
-		top: -179px;
 	}
 	.single-page {
 		padding: 30px 0;

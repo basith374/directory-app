@@ -81,7 +81,7 @@
 		<div class="mobile-app">
 			<div class="container">
 				<div class="col-md-5 app-left">
-					<a href="mobileapp.html"><img src="/img/app2.png" alt=""></a>
+					<a href="#"><img src="/img/app2.png" alt=""></a>
 				</div>
 				<div class="col-md-7 app-right">
 					<h3>Nokume App is the <span>Easiest</span> way for Selling and buying online goods</h3>
