@@ -68,6 +68,10 @@ class AdminController extends Controller
 		['hex' => '#7f8c8d', 'name' => 'ASBESTOS'],
 	];
     
+    protected $currency = [
+    	'INR', 'AED', 'USD', 'EUR'
+    ];
+
     /*
 		Ads
 		Admins
@@ -106,14 +110,16 @@ class AdminController extends Controller
 	public function createClassified() {
 		$categories = Category::root()->with('children')->get();
 		$cities = City::all();
-		return view('admin.classified_form', compact('categories', 'cities'));
+		$currency = $this->currency;
+		return view('admin.classified_form', compact('categories', 'cities', 'currency'));
 	}
 
 	public function editClassified(Classified $classified) {
 		// return response()->json($classified, 200, [], JSON_PRETTY_PRINT);
 		$categories = Category::root()->with('children')->get();
+		$currency = $this->currency;
 		$cities = City::all();
-		return view('admin.classified_form', compact('classified', 'categories', 'cities'));
+		return view('admin.classified_form', compact('classified', 'categories', 'cities', 'currency'));
 	}
 
 	public function updateClassified(Classified $classified, Request $request) {

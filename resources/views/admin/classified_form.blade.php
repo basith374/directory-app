@@ -66,9 +66,7 @@
 	                </div>
 	                <div class="form-group">
 	                  <label for="descInput">Description</label>
-	                  <textarea id="descInput" class="form-control" name="description" rows="5" placeholder="Write few lines about your product">
-	                  	{{ $classified->description or old('description') }}
-	                  </textarea>
+	                  <textarea id="descInput" class="form-control" name="description" rows="10" placeholder="Write few lines about your product">{{ $classified->description or old('description') }}</textarea>
 	                </div>
 	                <div class="form-group">
 	                  <label for="imageInput">Images</label>
@@ -77,6 +75,15 @@
 	                  @foreach($classified->images as $image)
 	                  <input type="hidden" name="images[]" value="{{ $image->image }}">
 	                  @endforeach
+	                </div>
+	                <div class="form-group">
+						<label for="currencyInput">Currency</label>
+						<select class="form-control" name="currency" id="currencyInput">
+							<option value>Select a currency</option>
+							@foreach($currency as $c)
+							<option value="{{ $c }}" {{ isset($classified) && $classified->currency == $c ? 'selected' : null }}>{{ $c }}</option>
+							@endforeach
+						</select>
 	                </div>
 	                <div class="form-group">
 	                  <label for="priceInput">Price</label>

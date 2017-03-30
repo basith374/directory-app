@@ -15,7 +15,7 @@ class ClassifiedTableLocationAndPrice extends Migration
     {
         Schema::table('classifieds', function (Blueprint $table) {
             $table->string('city');
-            $table->string('currency');
+            $table->string('currency')->nullable();
         });
     }
 

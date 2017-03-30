@@ -61,6 +61,7 @@ class ClassifiedController extends Controller
     	$this->validate($request, $this->rules);
     	$data = $request->only('name', 'price', 'owner', 'email', 'mobile', 'description', 'category_id', 'currency', 'city');
     	if(empty($data['price'])) $data['price'] = null;
+    	if(empty($data['currency'])) $data['currency'] = null;
     	if(auth()->check() && auth()->user()->userable_type == 'App\Member') {
     		$data['member_id'] = auth()->user()->userable_id;
     	}

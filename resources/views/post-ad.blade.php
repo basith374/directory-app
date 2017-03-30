@@ -49,6 +49,7 @@
 					<div class="clearfix"></div>
 					<label>Currency</label>
 					<select class="phone" name="currency">
+						<option value>Select a currency</option>
 						<option value="INR">INR</option>
 						<option value="AED">AED</option>
 						<option value="USD">USD</option>
