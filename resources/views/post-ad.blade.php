@@ -84,6 +84,13 @@
 			</div>
 		</div>	
 	</div>
+	<script>
+		// fix emoji codes problem
+		$('textarea').change(function() {
+			var textarea = $(this);
+			textarea.val(textarea.val().replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''));
+		});
+	</script>
 	<script src="{{ asset('js/dropzone.min.js') }}"></script>
 	<script>
 		Dropzone.autoDiscover = false;
