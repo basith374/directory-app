@@ -7,7 +7,7 @@ class ClassifiedSeeder extends Seeder
     public function run()
     {
     	DB::table('classifieds')->delete();
-    	$cities = DB::table('cities')->pluck('id')->all();
+    	$cities = DB::table('cities')->pluck('name')->all();
     	$categories = DB::table('categories')->pluck('id', 'slug')->all();
     	$data = [
     		'mobiles' => [
@@ -203,7 +203,7 @@ class ClassifiedSeeder extends Seeder
     			$item['mobile'] = $faker->phoneNumber;
     			$item['email'] = $faker->email;
     			$item['description'] = $faker->text(200);
-    			$item['city_id'] = $cities[array_rand($cities)];
+    			$item['city'] = $cities[array_rand($cities)];
     			$item['approved'] = 1;
     			$img = isset($item['image']) ? $item['image'] : null;
     			unset($item['image']);

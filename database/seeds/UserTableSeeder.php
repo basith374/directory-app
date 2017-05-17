@@ -11,6 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('admins')->delete();
+        DB::table('users')->delete();
     	$admin = \App\Admin::create(['privilege' => 0]);
         $admin->user()->create(['name' => 'Nazeer', 'email' => 'admin@info.com', 'password' => bcrypt('admin')]);
     }
