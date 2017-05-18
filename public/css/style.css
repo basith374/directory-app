@@ -2233,7 +2233,7 @@ h3.rate {
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
     width: 260px;
 }
-#custom-search-input {
+.custom-search-input {
     padding: 3px;
     border: solid 1px #D1E0EE;
     border-radius: 0;
@@ -2246,12 +2246,12 @@ h3.rate {
     color: #000;
 }
 
-#custom-search-input input{
+.custom-search-input input {
     border: 0;
     box-shadow: none;
 }
 
-#custom-search-input button{
+.custom-search-input button {
     margin: 2px 0 0 0;
     background: none;
     box-shadow: none;
@@ -2261,15 +2261,12 @@ h3.rate {
     border-left: solid 1px #ccc;
 }
 
-#custom-search-input button:hover{
+.custom-search-input button:hover{
     border: 0;
     box-shadow: none;
     border-left: solid 1px #ccc;
 }
 
-#custom-search-input .glyphicon-search{
-    font-size: 23px;
-}
 .input-lg {
     height: 29px;
     padding: 0px 10px;
@@ -2281,7 +2278,7 @@ h3.rate {
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
 }
-#custom-search-input .glyphicon-search {
+.custom-search-input .glyphicon {
     font-size: 16px;
 }
 .btn-default {
@@ -3367,7 +3364,7 @@ label {
 	.ads-list select {
 		width: 85%;
 	}
-	#custom-search-input {
+	.custom-search-input {
 		width: 95%;
 	}
 	.btn-group.bootstrap-select.show-tick button {
@@ -3840,10 +3837,13 @@ label {
 	.ads-list select {
 		width: 48.5%;
 	}
+	.ads-list #city-input {
+		width: 48.5%;
+	}
 	.btn-group.bootstrap-select.show-tick button {
 		width: 100%;
 	}	
-	#custom-search-input {
+	.custom-search-input {
 		width: 48.5%;
 	}
 	.sitemap-region-grid {
@@ -4125,7 +4125,7 @@ label {
 	.featured-ad:nth-child(3){
 		display:none;
 	}
-	.ads-list select,#custom-search-input {
+	.ads-list select,.custom-search-input {
 		width: 69.5%;
 	}
 	.search-hotel input[type="text"] {
@@ -4360,7 +4360,7 @@ label {
 	.category {
 		padding: 20px 15px;
 	}
-	.ads-list select, #custom-search-input {
+	.ads-list select, .custom-search-input {
 		width: 84.5%;
 	}
 	.featured-ad {
@@ -4427,7 +4427,7 @@ label {
 		width: 80%;
 		margin: 2% 10%;
 	}
-	.ads-list select, #custom-search-input {
+	.ads-list select, .custom-search-input {
 		width: 95.5%;
 	}
 	.breadcrumb {
@@ -4535,7 +4535,7 @@ label {
 	.btn-group.bootstrap-select.show-tick button {
 		width: 93%;
 	}
-	.ads-list select, #custom-search-input {
+	.ads-list select, .custom-search-input {
 		width: 99.5%;
 	}
 	.banner h1 {
@@ -4715,4 +4715,7 @@ label {
 }
 .prof-tabs .tab-pane {
 	padding-top: 2em;
+}
+.ui-slider-handle {
+	transition: none;
 }

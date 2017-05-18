@@ -38,12 +38,31 @@ class ClassifiedController extends Controller
 		}
 		$data = [];
 		if($request->has('city')) {
-			$data['city'] = City::where('slug', $request->city)->first();
-			$query->whereHas('city', function($q) use ($request) {
-				$q->where('slug', $request->city);
+			$tokens = explode(' ', $request->city);
+			$query->where(function($q) use ($tokens) {
+				foreach($tokens as $token) {
+					if(ctype_alpha($token)) $q->orWhere('city', 'like', '%' . $token . '%');
+				}
 			});
 		}
 		/* end shared */
+		if($request->has('sortby')) {
+			switch($request->sortby) {
+				case 'lth':
+					$query->orderBy('price');
+					break;
+				case 'htl':
+					$query->orderBy('price', 'desc');
+					break;
+				default:
+					$query->orderBy('id', 'desc');
+			}
+		}
+		if($request->has('price_range')) {
+			$prices = explode(',', $request->price_range);
+			$query->where('price', '>=', $prices[0]);
+			$query->where('price', '<=', $prices[1]);
+		}
 		$classifieds = $query->paginate(12);
 		$data = array_merge($data, compact('categories', 'cities', 'classifieds'));
 		// return response()->json($data, 200, [], JSON_PRETTY_PRINT);

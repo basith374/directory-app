@@ -42,13 +42,20 @@ var elem=$('#container ul');
 			<div class="select-box">
 				<form action="{{ isset($category) ? $category->slug : 'all-classifieds' }}" method="GET" id="filter">
 					<div class="select-city-for-local-ads ads-list">
+						
 						<label>Select your city to see local ads</label>
-						<select name="city">
-							<option selected value style="display:none;color:#eee;">Entire UAE</option>
-							@foreach($cities as $c)
-							<option value="{{ $c->slug }}" {{ isset($city) && $c->slug == $city->slug ? 'selected':null }}>{{ $c->name }}</option>
-							@endforeach
-			            </select>
+						<div class="search">
+							<div class="custom-search-input">
+								<div class="input-group">
+									<input type="text" class="form-control input-lg" placeholder="" name="city" value="{{ Request::get('city') }}" id="city-input">
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-lg" type="submit">
+											<i class="glyphicon glyphicon-map-marker"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="browse-category ads-list">
 						<label>Browse Categories</label>
@@ -62,7 +69,7 @@ var elem=$('#container ul');
 					<div class="search-product ads-list">
 						<label>Search for a specific product</label>
 						<div class="search">
-							<div id="custom-search-input">
+							<div class="custom-search-input">
 								<div class="input-group">
 									<input type="text" class="form-control input-lg" placeholder="Buscar" name="q" value="{{ Request::get('q') }}" />
 									<span class="input-group-btn">
@@ -129,17 +136,55 @@ var elem=$('#container ul');
 						<!---->
 						<script type="text/javascript" src="/js/jquery-ui.js"></script>
 						<script type='text/javascript'>//<![CDATA[ 
+							function modifyParam(key, value) {
+								var url = window.location.href;
+								var params = window.location.href.split('?')[1].split('&');
+								var newParams = {};
+								for(var i in params) {
+									var splitted = params[i].split('=');
+									newParams[splitted[0]] = splitted[1];
+								}
+								newParams[key] = value;
+								return window.location.pathname + '?' + $.param(newParams)
+							}
 						$(window).load(function() {
+							function debounce(func, wait, immediate) {
+								var timeout;
+								return function() {
+									var context = this, args = arguments;
+									var later = function() {
+										timeout = null;
+										if (!immediate) func.apply(context, args);
+									};
+									var callNow = immediate && !timeout;
+									clearTimeout(timeout);
+									timeout = setTimeout(later, wait);
+									if (callNow) func.apply(context, args);
+								};
+							};
+							function filterPrice( event, ui ) {
+								console.log('filtering')
+								$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+								var url = modifyParam('price_range', ui.values[0] + ',' + ui.values[1])
+								console.log(url)
+								$.ajax({
+									url: url,
+									success: function(rsp) {
+										var html = $(rsp);
+										$("#listings").html(html.find('#listings').children());
+										$("#pages").html(html.find('#pages').children())
+									}
+								})
+								// $('#listings').load(url + ' #listings ul');
+							}
 							$( "#slider-range" ).slider({
 								range: true,
 								min: {{ $classifieds->min('price') ?: 0 }},
 								max: {{ $classifieds->max('price') ?: 0 }},
 								values: [ {{ $classifieds->min('price') ?: 0 }}, {{ $classifieds->max('price') ?: 0 }} ],
-								slide: function( event, ui ) {
-									$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-								}
+								slide: debounce(filterPrice, 500)
 							});
-						$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+							$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 
 						});//]]>
 						</script>
@@ -185,13 +230,15 @@ var elem=$('#container ul');
 									</select>
 									<script>
 										$("#sorting").change(function() {
-											var order = $(this).val();
-											console.log(window.location.href)
+											var sortby = $(this).val();
+											var url = modifyParam('sortby', sortby);
+											$('#listings').load(url + ' #listings ul');
 										});
 									</script>
 							   	</div>
 							</div>
 							<div class="clearfix"></div>
+							<div id="listings">
 							@if($classifieds->count())
 							<ul class="list">
 								@foreach($classifieds as $classified)
@@ -221,8 +268,11 @@ var elem=$('#container ul');
 								<p>No ads</p>
 							</div>
 							@endif
+							</div>
 						</div>
+						<div id="pages">
 						{{ $classifieds->appends(Request::all())->links() }}
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -232,5 +282,17 @@ var elem=$('#container ul');
 	<script>
 		
 	</script>
+	<script type="text/javascript">
+		function initMap() {
+        	var input = document.getElementById('city-input');
+        	var autocomplete = new google.maps.places.Autocomplete(input);
+        	autocomplete.addListener('place_changed', function() {
+          		var place = autocomplete.getPlace();
+          		console.log(place.geometry.location)
+        	});
+		}
+	</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeiE68bF7PYcHMdnGt4WVbiBkIlJg50A&libraries=places&callback=initMap"
+        async defer></script>
 	<!-- // Products -->
 @endsection
