@@ -9,9 +9,7 @@ class Category extends Model
 {
 
     use Sluggable;
-
 	protected $guarded = ['id'];
-    
 	public function getRouteKeyName() {
 		return 'slug';
 	}
@@ -24,7 +22,7 @@ class Category extends Model
 		$count = $this->classifieds->count();
 		if($this->level == 0) {
 			$count = $this->children->reduce(function($carry, $cat) {
-				return $carry + $cat->classifieds->count();
+			return $carry + $cat->classifieds->count();
 			}, $count);
 		}
 		return $count;

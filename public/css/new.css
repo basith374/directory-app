@@ -1,0 +1,142 @@
+
+.ads-display{
+    background-color:#fff;
+    }
+.ads-grid{
+    margin:20px 0px 70px 0px;
+}
+.ads{
+    padding-left:20px;
+    padding-right:-40px;
+    }
+
+.viewcontrols{
+    padding-left:50px;
+    color:#4d4d4d;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.list li {
+    box-shadow: 0px 0px 10px #ccc;
+    padding:20px;
+    list-style-type:none;
+    margin-bottom:20px;
+    background-color:#f5f5ef;
+    box-shadow: 0 0 0.6em #ccc;
+    -webkit-box-shadow: 0 0 0.3em #E4E4E4;
+    -o-box-shadow: 0 0 0.3em #E4E4E4;
+    -moz-box-shadow: 0 0 0.3em #E4E4E4;
+    -ms-box-shadow: 0 0 0.3em #E4E4E4;
+    margin: 2%;
+    background: #F7F7F7;
+}
+
+.list .left{
+    width:60%;
+    margin-left:3%;
+    float:left;
+    color:#4d4d4d;
+}
+.left h5{
+    font-size:25px;
+}
+.date{
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    margin: 15px 0 5px 0;
+    font-weight: 400;
+    display:inline-block;
+}
+
+.list .right{
+    margin-top:40px;
+    width:20%;
+    float:right;
+    text-align:right;
+    color:#4d4d4d;
+}
+ .list img  {
+   border: 1px solid #e6e6e6;
+    background-color: #fff;
+    width: 150px;
+    height: 120px;
+    float: left;
+}
+
+
+.view-controls-list{
+    padding-left:50px;
+    color:#4d4d4d;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.sort{
+    float:right;
+    margin-top:-45px;
+    color:#4d4d4d;
+}
+
+.view-controls-grid{
+width: 20%;
+text-align: left;
+margin-bottom: 15px;
+
+}
+.ads-grid{
+    margin:20px 0px 70px 0px;
+}
+.ads-display{
+    display:block;
+}
+.grid li {
+    margin-top:30px;
+    box-shadow: 0px 0px 10px #ccc;
+    list-style-type:none;
+    margin-top:20px;
+    background-color:#f5f5ef;
+    width:30%;
+    display:block;
+}
+
+.grid .left{
+    text-align: left;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: 10px;   
+    float:left;
+    color:#4d4d4d;
+}
+.left h5{
+    font-size:25px;
+}
+.date{
+    display:inline-block;
+}
+
+.grid .right{
+    margin-left:10px;
+    display: block;
+}
+
+.grid li img{
+    text-align:center;
+    width:100%;
+    }
+.view-controls-grid{
+    padding-left:50px;
+    color:#4d4d4d;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.sort{
+    float:right;
+    margin-top:-45px;
+    color:#4d4d4d;
+}
+
+
+ 

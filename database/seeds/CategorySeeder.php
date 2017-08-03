@@ -12,7 +12,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $data = [
-        	['name' => 'Mobiles', 'extra_class' => 'fa-mobile', 'image' => 'cat1.png', 'sub' => [
+        	['name' => 'Mobiles', 'extra_class' => 'fa-mobile', 'image' => 'b12.png', 'sub' => [
         		'Mobile Phones', 'Tablets', 'Accessories'
         	]],
         	['name' => 'Electronics & Appliances', 'extra_class' => 'fa-laptop', 'image' => 'cat2.png', 'sub' => [

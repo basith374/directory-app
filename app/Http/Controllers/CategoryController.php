@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Category;
 use App\Classified;
@@ -62,7 +61,7 @@ class CategoryController extends Controller
 			});
 		}
 		$classifieds = $query->paginate(12);
-		/* end shared */
+		/*end shared*/
 		$data = array_merge($data, compact('breadcrumbs', 'categories', 'cities', 'classifieds'));
 		$data['category'] = $cat;
 		return view('classifieds', $data);

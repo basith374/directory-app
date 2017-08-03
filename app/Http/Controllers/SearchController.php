@@ -29,7 +29,7 @@ class SearchController extends Controller
 		if($subcategory != null && $subcategory->id == null) {
 			abort(404);
 		}
-		if($request->has('category') && $request->category != $category->slug) {
+		if($request->has('category')) {
 			return redirect()->action('CategoryController@show', array_merge($request->except('category'), ['category' => $request->category]));
 		}
 		/* end shared */
@@ -64,7 +64,24 @@ class SearchController extends Controller
 				$q->where('slug', $request->city);
 			});
 		}
-		$classifieds = $query->paginate(12);
+        	 if($request->has('sortby')) {
+             switch($request->sortby) {
+		 		case 'lth':
+		 			$query->orderBy('price');
+		 			break;
+		 		case 'htl':
+		 			$query->orderBy('price', 'desc');
+		 			break;
+		 		default:
+		 			$query->orderBy('id', 'desc');
+                }
+            }
+        if($request->has('price_range')) {
+			$prices = explode(',', $request->price_range);
+			$query->where('price', '>=', $prices[0]);
+			$query->where('price', '<=', $prices[1]);
+		}
+		$classifieds = $query->paginate(10);
 		/* end shared */
 		$data = array_merge($data, compact('breadcrumbs', 'categories', 'cities', 'classifieds'));
 		$data['category'] = $cat;
@@ -92,5 +109,4 @@ class SearchController extends Controller
 		$cities = City::all();
 		return view('sitemap', compact('categories', 'cities'));
 	}
-
 }

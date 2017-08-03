@@ -12,7 +12,8 @@ class CitySeeder extends Seeder
     		'Sharjah',
     		'Fujairah',
     		'Al Ain',
-    		'Ras al-Khaimah'
+    		'Ras al-Khaimah',
+            'aaaa'
     	];
         DB::table('cities')->delete();
         foreach($data as $d) {
