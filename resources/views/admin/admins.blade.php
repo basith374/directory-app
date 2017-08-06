@@ -42,7 +42,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                	@foreach($admins as $admin)
+                	@forelse($admins as $admin)
                 	<tr>
                 		<td></td>
                 		<td>{{ $admin->user->name . ($admin->user->id == auth()->user()->id ? ' (You)' : null) }}</td>
@@ -66,7 +66,11 @@
 			                @endif
                 		</td>
                 	</tr>
-                	@endforeach
+                  @empty
+                  <tr>
+                    <td align="center" colspan="5">No users</td>
+                  </tr>
+                	@endforelse
                 </tbody>
               </table>
             </div>
