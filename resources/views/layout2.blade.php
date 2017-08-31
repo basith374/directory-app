@@ -37,9 +37,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/flexslider.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css">
         <link rel="stylesheet" href="/css/flexslider.css">
-         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/main.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
         <script src="/js/jquery-1.11.2.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/main.js"></script>
@@ -63,7 +62,7 @@
          <div class="navbar navbar-default">
             <div class="container">
               <div class="navbar-header">
-                <a class="navbar-brand">My Site</a>
+                <a class="navbar-brand" href='/'>My Site</a>
               </div>
               <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -86,14 +85,21 @@
                         <div class="primary-child">
                             <h1>Your business partner forever</h1>
 		                     	<p>Sell or Advertise anything online with Nokume</p>
-                             <form action="{{ isset($category->slug) ? $category : 'all-classifieds' }}" method="GET" id="filter">
-                                <div class="searchbox">  
-                                    <input type="text" class="form-control light" id="filter" placeholder="Search restaurants, events, places" name="q" value="{{ Request::get('q') }}">             
-                                
-                                    <button class="btn btn-web">Search</button>
-                               
-                                </div>
+                           
+                             <form action="{{ isset($category->slug) ? 'categories/' . $category : 'all-classifieds' }}" method="GET" id="filter">
+                                    <div class="searchbox">  
+                                        <input type="text" class="form-control light" id="filter" placeholder="Search restaurants, events, places" name="q" value="{{ Request::get('q') }}">             
+                                                                                
+                                                        <select class="posit" data-live-search="true" id="cat-filter">                    
+                                                                @foreach($categories as $cat)
+                                                                        <option data-tokens="{{ $cat->name }}" value="categories/{{ $cat->slug }}" {{ isset($category) && $cat->id == $category->id ? 'selected' :null }}>{{ $cat->name }}</option>                          
+                                                                @endforeach
+                                                        </select>
+                                         
+                                        <button class="btn btn-web">Search</button> 
+                                    </div>
                               </form>
+                           
                          </div>
                     </div>
                 </div>

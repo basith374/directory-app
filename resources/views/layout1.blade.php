@@ -66,7 +66,7 @@
          <div class="navbar navbar-default">
             <div class="container">
               <div class="navbar-header">
-                <a class="navbar-brand">My Site</a>
+                <a class="navbar-brand" href='/'>My Site</a>
               </div>
               <ul class="nav navbar-nav navbar-right">
                 <li>

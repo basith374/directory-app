@@ -73,7 +73,7 @@
                                             <tr>
                                                 <td>{{ $classified->name }}</td>
                                                 <td>{{ $classified->price or 'N/A' }}</td>
-                                                <td>{{ $classified->view }}</td>
+                                                <td>{{ $classified->views }}</td>
                                                 <td>{{ $classified->approved ? 'Yes' : 'No' }}</td>
                                             </tr>
                                             @empty

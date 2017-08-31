@@ -34,7 +34,9 @@ Route::get('/single', function() {
 Route::get('/index', function(){
    return View('index');
 });
-
+Route::get('/profile', function(){
+   return View('profile');
+});
 Route::get('/classifieds', function(){
    return View('classifieds');
 });
@@ -42,22 +44,19 @@ Route::get('/classifieds', function(){
 
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/login', 'Auth\LoginController@login');
-
 Route::get('/register', function() {
 	return view('register');
 });
 
 Route::post('/register', 'MemberController@store');
 Route::get('/post-ad', 'ClassifiedController@create');
-Route::post('/post-ad', 'ClassifiedController@store');
+Route::post('/post-ad', 'ClassifiedController@store');            
 Route::post('/post-ad-images', 'ClassifiedController@tempImages');
-
-Route::get('/categories/{cat?}', 'CategoryController@index');
-
-Route::get('sitemap', 'SearchController@sitemap');
-
 Route::get('/all-classifieds', 'ClassifiedController@index');
-
+Route::get('/categories/{cat}','CategoryController@search');
+Route::get('/{cat}','SearchController@search');
+Route::get('/categories/{cat}/{sub}','SearchController@search');
+Route::get('sitemap', 'SearchController@sitemap');
 Route::get('/classifieds/{classified}', 'ClassifiedController@show');
 
 Route::get('cats', function() {
@@ -65,23 +64,21 @@ Route::get('cats', function() {
 	return response()->json($data, 200, [], JSON_PRETTY_PRINT);
 });
 
-Route::group(['middleware' => 'auth'], function() {
-	Route::get('profile', 'MemberController@show');
+	Route::group(['middleware' => 'auth'], function() {
+	Route::get('/profile', 'MemberController@show');
 	Route::post('profile/name', 'MemberController@updateName');
 	Route::post('profile/email', 'MemberController@updateEmail');
 	Route::post('profile/password', 'MemberController@updatePassword');
 });
-
-Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
+                                                                        
+	Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('dashboard', 'AdminController@dashboard');
 	Route::get('admins', 'AdminController@admins');
 	Route::get('admins/create', 'AdminController@createAdmin');
 	Route::post('admins', 'AdminController@storeAdmin');
 	Route::get('admins/{admin}/edit', 'AdminController@editAdmin');
 	Route::delete('admins/{admin}', 'AdminController@deleteAdmin');
-
 	Route::get('members', 'AdminController@members');
-
 	Route::get('categories', 'AdminController@categories');
 	Route::get('categories/create', 'AdminController@createCategory');
 	Route::post('categories', 'AdminController@storeCategory');
@@ -93,11 +90,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('classifieds/{classified}/edit', 'AdminController@editClassified');
 	Route::patch('classifieds/{classified}', 'AdminController@updateClassified');
 	Route::delete('classifieds/{classified}', 'AdminController@deleteClassified');
-
 	Route::get('settings', 'AdminController@settings');
 	Route::post('settings/banner', 'AdminController@changeBanner');
 	Route::get('cities', 'AdminController@cities');
-
 });
 
-Route::get('{search}/{search2?}', 'SearchController@search');
+
+
+
+
+
+
+
+// Route::get('{search}/{search2?}', 'SearchController@search');

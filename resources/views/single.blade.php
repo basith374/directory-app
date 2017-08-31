@@ -9,23 +9,25 @@
                 </div>
                     <div class="container">
                     <div class="col-md-12">
-                        <div class="crumbs">
-                            <ol class="breadcrumb" style="margin-bottom: 5px;">
-                                    <li><a href="/">Home</a></li>
+                     <div class="crumbs">
+                            <ol class="breadcrumb">
+                            <li><a href="/">Home</a></li>
+                                    @if(isset($breadcrumbs))
                                     <li><a href="/all-classifieds">All Ads</a></li>
-                                    @foreach($breadcrumbs as $breadcrumb)
-                                    <li{!! !isset($breadcrumb['href']) ? ' class="active"' : null !!}>
-                                        @if(isset($breadcrumb['href']))
-                                        <a href="{{ $breadcrumb['href'] }}">{{ $breadcrumb['name'] }}</a>
-                                        @else
-                                        {{ $breadcrumb['name'] }}
-                                        @endif
-                                    </li>
-                                    @endforeach
-                                </ol>
-                        </div>
+                                            @foreach($breadcrumbs as $crumb)
+                                                @if(isset($crumb['href']))
+                                                    <li><a href="/categories{{($crumb['href']) }}">{{ $crumb['name'] }}</a></li>
+                                                        @else
+                                                    <li class="active">{{ $crumb['name'] }}</li>
+                                                @endif
+                                            @endforeach
+                                            @else
+                                    <li class="active">All Ads</li>
+                                @endif
+                            </ol>
                     </div>
                 </div>
+            </div>
                <div class="addetails">
                         <div class="col-md-7 display">
                         
@@ -34,41 +36,41 @@
                                         <i class="glyphicon glyphicon-map-marker"></i>  
                                         <a href="#">Located At</a>&nbsp;<a href="#">{{ $classified->city }}</a>| Added at {{ $classified->created_at->toDateString() }}, Ad ID: {{ $classified->id }}</p>
                                     </p>
-                                    <div id="slider" class="flexslider">
-                                            <ul class="slides">
-                                            @if($classified->images->count())
-                                                  @foreach($classified->images as $image)
-                                                        <li>
-                                                              <img src="{{$image->image}}">         
-                                                        </li>
-                                                  @endforeach
-                                                  @else
-                                                  <li>
-                                                              <img src="img/bg1.png">
-                                                  </li>
-                                            @endif     
-                                            </ul>
-                                            </div>
-                                             <div id="carousel" class="flexslider"> 
+                                        <div id="slider" class="flexslider">
                                                 <ul class="slides">
-                                                    @foreach($classified->images as $image)
-                                                        <li>    
-                                                            <img src="{{ $image->image }}"/> 
-                                                        </li> 
-                                                    @endforeach        
+                                                    @if($classified->images->count())
+                                                                @foreach($classified->images as $image)
+                                                                    <li>
+                                                                        <img src="{{$image->image}}">         
+                                                                    </li>
+                                                                @endforeach
+                                                            @else
+                                                                <li>
+                                                                    <img src="img/bg1.png">
+                                                                </li>
+                                                    @endif     
                                                 </ul>
-                                             </div>
+                                        </div>
+                                        <div id="carousel" class="flexslider"> 
+                                            <ul class="slides">
+                                                    @foreach($classified->images as $image)
+                                                            <li>    
+                                                                <img src="{{ $image->image }}"/> 
+                                                            </li> 
+                                                    @endforeach        
+                                            </ul>
+                                        </div>
                                         <h4>Views: <b>{{ $classified->views }}</b> </h4>
                                         <p><b>Summary:</b>{{ $classified->description }}</p>
                         </div>                   
                         <div class="col-md-5 prtype">        
                                 <div class="types">
-                                            @if($classified->price)
-                                                <div class="pri">
-                                                    <p>Price</p>
-                                                    <h2> {{ $classified->currency }} {{ $classified->price }} </h2>
-                                                </div>
-                                            @endif
+                                                    @if($classified->price)
+                                                        <div class="pri">
+                                                            <p>Price</p>
+                                                            <h2> {{ $classified->currency }} {{ $classified->price }} </h2>
+                                                        </div>
+                                                    @endif
                                             <div class="item">
                                                 <p>Category</p>
                                                 <h2> {{ $classified->category->name }} </h2>
@@ -104,6 +106,37 @@
                         </div>
                     </div>
 
+                        <script>
+                            $(window).load(function() {
+                                $('#carousel').flexslider({ 
+                                    directionNav: true,
+                                    slideshow: false,
+                                    touch: true,
+                                    animation: "slide",
+                                    controlNav: false,
+                                    animationLoop: true,
+                                    itemWidth: 120,
+                                    itemMargin: 5,
+                                    asNavFor: '#slider',
+                                });
+
+                                $('#slider').flexslider({ 
+                                    slideshow: false,
+                                    directionNav: true,
+                                    touch: true,
+                                    useCSS: false,
+                                    slideshowSpeed: 3000,
+                                    animationSpeed: 300,
+                                    animation: "slide",            
+                                    controlNav: false,
+                                    animationLoop: true,
+                                    sync: "#carousel",
+                                });
+                            });
+                        </script>
+
+
+<!--
                   <script>
                          $(window).load(function() {
                     // The slider being synced must be initialized first
@@ -124,8 +157,7 @@
                     });
                     
                     $('#slider').flexslider({
-                        animation: "slide",
-                        useCSS: false,
+                        animation: "slide",                      
                         controlNav: false,
                         animationLoop: true,
                         slideshow: false,
@@ -140,6 +172,6 @@
                     });
                     });
                                                                                                                                               
-                </script>             
+                </script>             -->
         
        @endsection

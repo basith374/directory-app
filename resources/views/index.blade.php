@@ -72,19 +72,6 @@
                             </div>
                         </div>
                     </div>
-
-                 
-                    <!--<div class="subscribe">
-                        <div class="container">
-                            <div class="mail">
-                                <h3>Subscribe Now For Latest Updates</h3>
-                                <div class="subscription">
-                                    <input type="text" class="form-control light" placeholder="Enter your email id">
-                                    <button class="btn btn-web">Subscribe</button>
-                                </div>
-                           </div>
-                        </div>
-                    </div>-->
                     <div class="clearfix">
                     </div>
                     <div class="signup">  

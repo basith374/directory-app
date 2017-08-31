@@ -46,7 +46,13 @@ class ClassifiedController extends Controller
 				}
 			});
 		}
+		
 		/* end shared */
+		if($request->has('price_range')) {
+			$prices = explode(',', $request->price_range);
+			$query->where('price', '>=', $prices[0]);
+			$query->where('price', '<=', $prices[1]);
+		}
 		 if($request->has('sortby')) {
 		 	switch($request->sortby) {
 		 		case 'lth':
@@ -59,18 +65,12 @@ class ClassifiedController extends Controller
 		 			$query->orderBy('id', 'desc');
 		 	}
 		 }
-	
-		if($request->has('price_range')) {
-			$prices = explode(',', $request->price_range);
-			$query->where('price', '>=', $prices[0]);
-			$query->where('price', '<=', $prices[1]);
-		}
 		$classifieds = $query->paginate(10);
 		$data = array_merge($data, compact('categories', 'cities', 'classifieds'));
 		// return response()->json($data, 200, [], JSON_PRETTY_PRINT);
 		return view('classifieds', $data);
     }
-
+	
 		public function create() {
 		$categories = Category::root()->with('children')->get();
 		$cities = \DB::table('cities')->get();
