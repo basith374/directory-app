@@ -911,17 +911,7 @@
           }
         }
         // INFINITE LOOP && !CAROUSEL:
-        if (slider.vars.animationLoop && !carousel) {
-          slider.cloneCount = 2;
-          slider.cloneOffset = 1;
-          // clear out old clones
-          if (type !== "init") { slider.container.find('.clone').remove(); }
-          slider.container.append(methods.uniqueID(slider.slides.first().clone().addClass('clone')).attr('aria-hidden', 'true'))
-                          .prepend(methods.uniqueID(slider.slides.last().clone().addClass('clone')).attr('aria-hidden', 'true'));
-        }
-        slider.newSlides = $(slider.vars.selector, slider);
-
-        sliderOffset = (reverse) ? slider.count - 1 - slider.currentSlide + slider.cloneOffset : slider.currentSlide + slider.cloneOffset;
+        
         // VERTICAL:
         if (vertical && !carousel) {
           slider.container.height((slider.count + slider.cloneCount) * 200 + "%").css("position", "absolute").width("100%");

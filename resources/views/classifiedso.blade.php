@@ -95,7 +95,7 @@ var elem=$('#container ul');
 				<h3>Select your category and find the perfect ad</h3>
 				<ul class="all-cat-list">
 					@foreach($categories as $cat)
-					<li><a href="{{ url($cat->slug) }}">{{ $cat->name }} <span class="num-of-ads">({{ $cat->adCount() }})</span></a></li>
+						<li><a href="{{ url($cat->slug) }}">{{ $cat->name }} <span class="num-of-ads">({{ $cat->adCount() }})</span></a></li>
 					@endforeach
 				</ul>
 			</div>

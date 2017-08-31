@@ -9,6 +9,15 @@ use App\City;
 
 class SearchController extends Controller
 {
+	protected $rules = [
+		'name' => 'required',
+		'owner' => 'required',
+		'mobile' => 'required',
+		'description' => 'required',
+		'category_id' => 'required',
+		'city' => 'required'
+	];
+
     
 	public function search(Request $request, $slug, $slug2 = null) {
 		$category = Category::where('slug', $slug)->first();
@@ -20,6 +29,7 @@ class SearchController extends Controller
 			return $this->searchCity($request, $city);
 		}
 		abort(404);
+		
 	}
 
 	public function searchCategory($request, $category, $sub) {
@@ -30,6 +40,7 @@ class SearchController extends Controller
 			abort(404);
 		}
 		if($request->has('category')) {
+
 			return redirect()->action('CategoryController@show', array_merge($request->except('category'), ['category' => $request->category]));
 		}
 		/* end shared */
@@ -59,13 +70,20 @@ class SearchController extends Controller
 		}
 		$data = [];
 		if($request->has('city')) {
-			$data['city'] = City::where('slug', $request->city)->first();
-			$query->whereHas('city', function($q) use ($request) {
-				$q->where('slug', $request->city);
+			$tokens = explode(' ', $request->city);
+			$query->where(function($q) use ($tokens) {
+				foreach($tokens as $token) {
+					if(ctype_alpha($token)) $q->orWhere('city', 'like', '%' . $token . '%');
+				}
 			});
 		}
-        	 if($request->has('sortby')) {
-             switch($request->sortby) {
+		if($request->has('price_range')) {
+			$prices = explode(',', $request->price_range);
+			$query->where('price', '>=', $prices[0]);
+			$query->where('price', '<=', $prices[1]);
+		}
+		 if($request->has('sortby')) {
+		 	switch($request->sortby) {
 		 		case 'lth':
 		 			$query->orderBy('price');
 		 			break;
@@ -74,13 +92,9 @@ class SearchController extends Controller
 		 			break;
 		 		default:
 		 			$query->orderBy('id', 'desc');
-                }
-            }
-        if($request->has('price_range')) {
-			$prices = explode(',', $request->price_range);
-			$query->where('price', '>=', $prices[0]);
-			$query->where('price', '<=', $prices[1]);
-		}
+		 	}
+		 }
+	
 		$classifieds = $query->paginate(10);
 		/* end shared */
 		$data = array_merge($data, compact('breadcrumbs', 'categories', 'cities', 'classifieds'));
